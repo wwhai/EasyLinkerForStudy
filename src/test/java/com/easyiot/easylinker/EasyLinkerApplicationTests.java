@@ -20,21 +20,21 @@ public class EasyLinkerApplicationTests {
 
     @Test
     public void contextLoads() {
-//        for (int i = 0; i < 25; i++) {
-//            MqttClient mqttClient = new MqttClient();
-//            mqttClientService.save(mqttClient);
-//
-//        }
-//
-//
-//        for (int i = 0; i < 35; i++) {
-//            UserMessage userMessage = new UserMessage();
-//            userMessage.setUserId(1L);
-//            userMessage.setTitle("测试标题" + i);
-//            userMessage.setContent("测试消息" + i);
-//            userMessageService.save(userMessage);
-//
-//        }
+        for (int i = 0; i < 25; i++) {
+            MqttClient mqttClient = new MqttClient();
+            mqttClientService.save(mqttClient);
+
+        }
+
+
+        for (int i = 0; i < 35; i++) {
+            UserMessage userMessage = new UserMessage();
+            userMessage.setUserId(1L);
+            userMessage.setTitle("测试标题" + i);
+            userMessage.setContent("测试消息" + i);
+            userMessageService.save(userMessage);
+
+        }
 
     }
 

@@ -94,7 +94,7 @@ public class UserMessageService {
      * @return
      */
     public Page<UserMessage> list(Long userId, Integer state, Pageable pageable) {
-        return dao.findAllByUserIdAndState(userId, state, pageable);
+        return dao.findAllByUserIdAndStateOrderByIdDesc(userId, state, pageable);
 
     }
 }

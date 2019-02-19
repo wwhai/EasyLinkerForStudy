@@ -21,10 +21,7 @@ public class MqttClient {
      *
      */
     private Long id;
-    /**
-     *
-     */
-    private String clientId = System.currentTimeMillis() + (long) (Math.random() * 100) + "";
+
     /**
      *
      */
@@ -53,7 +50,7 @@ public class MqttClient {
      */
     private Integer access = 1;
     /**
-     *
+     * topic= /mqtt/client/userId/groupId/clientId
      */
     private String topic = "/mqtt/client/userId/";
 
@@ -68,9 +65,26 @@ public class MqttClient {
     private String longitude = "0";
     private String latitude = "0";
     /**
-     *
+     * UUID
      */
-    private String uuid = UUID.randomUUID().toString().replace("-", "").toUpperCase();
+    private String clientId = UUID.randomUUID().toString().replace("-", "").toUpperCase();
+
+    /**
+     * 设备类型 分为
+     * 1 value :比如温湿度
+     * 2 switcher :开关类型，只有0 1 两个状态
+     * 3 string :字符串型，比如聊天室
+     */
+
+    private String type="VALUE";
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public Long getId() {
         return id;
@@ -168,11 +182,5 @@ public class MqttClient {
         this.latitude = latitude;
     }
 
-    public String getUuid() {
-        return uuid;
-    }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
 }

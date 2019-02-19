@@ -55,4 +55,30 @@ public class UserMessageController {
         }
 
     }
+
+    /**
+     * 标记已读
+     * @param modelAndView
+     * @param httpServletRequest
+     * @return
+     */
+
+    @RequestMapping(value = "/markRead")
+    public ModelAndView markRead(ModelAndView modelAndView, HttpServletRequest httpServletRequest) {
+        long id;
+        try {
+            id = Integer.parseInt(httpServletRequest.getParameter("id"));
+        } catch (Exception e) {
+            id = 0;
+        }
+        UserMessage userMessage = userMessageService.findOneById(id);
+        if (userMessage != null) {
+            userMessage.setState(0);
+            userMessageService.update(userMessage);
+        }
+        modelAndView.setViewName("redirect:/userMessage/list?state=1");
+        return modelAndView;
+
+    }
+
 }

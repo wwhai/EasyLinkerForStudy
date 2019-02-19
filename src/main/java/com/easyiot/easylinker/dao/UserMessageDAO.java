@@ -12,6 +12,6 @@ public interface UserMessageDAO extends JpaRepository<UserMessage, Long> {
      * @param state
      * @return
      */
-    Page<UserMessage> findAllByUserIdAndState(Long userId, Integer state, Pageable pageable);
+    Page<UserMessage> findAllByUserIdAndStateOrderByIdDesc(Long userId, Integer state, Pageable pageable);
 
 }

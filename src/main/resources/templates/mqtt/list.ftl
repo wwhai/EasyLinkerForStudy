@@ -51,7 +51,6 @@
                                     <thead>
                                     <tr>
                                         <th>编号</th>
-                                        <th>UUID</th>
                                         <th>设备号</th>
                                         <th>名称</th>
                                         <th>详情</th>
@@ -82,8 +81,7 @@
 
                                             <tr>
                                             <td class="text-nowrap">${mqttClient_index}</td>
-                                            <td class="text-nowrap">${mqttClient.uuid}</td>
-                                            <td>${mqttClient.clientId}</td>
+                                            <td class="text-nowrap">${mqttClient.clientId}</td>
                                             <td>${mqttClient.username}</td>
                                             <td>${mqttClient.deviceDescribe}</td>
                                             <td>[${mqttClient.latitude},${mqttClient.longitude}]</td>

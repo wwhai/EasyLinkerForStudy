@@ -32,14 +32,16 @@ public class GlobalSecurityFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponseWrapper wrapper = new HttpServletResponseWrapper((HttpServletResponse) servletResponse);
         User user = (User) httpServletRequest.getSession().getAttribute("user");
-        if (allowList.contains(httpServletRequest.getRequestURI()) || httpServletRequest.getRequestURI().endsWith(".js") || httpServletRequest.getRequestURI().endsWith(".css")) {
+        if (allowList.contains(httpServletRequest.getRequestURI()) ||
+                httpServletRequest.getRequestURI().endsWith(".js") ||
+                httpServletRequest.getRequestURI().endsWith(".css")) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
             if (user != null) {
-                System.out.println(user.getNickname() + " 已登录!");
+                //System.out.println(user.getNickname() + " 已登录!");
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
-                System.out.println("未登录" + "URL " + httpServletRequest.getRequestURI());
+                //System.out.println("未登录" + "URL " + httpServletRequest.getRequestURI());
 
                 wrapper.sendRedirect("/");
 

@@ -47,39 +47,25 @@
                                     <thead>
                                     <tr>
                                         <th>编号</th>
-                                        <th>id</th>
+                                        <th>创建时间</th>
                                         <th>标题</th>
+                                        <th>内容</th>
                                         <th>状态</th>
-
                                         <th>操作</th>
 
                                     </tr>
                                     </thead>
                                     <tbody>
 
-                                    <#--int getNumber();-->
-                                    <#--int getSize();-->
-                                    <#--int getNumberOfElements();-->
-                                    <#--List<T> getContent();-->
-                                    <#--boolean hasContent();-->
-                                    <#--Sort getSort();-->
-                                    <#--boolean isFirst();-->
-                                    <#--boolean isLast();-->
-                                    <#--boolean hasNext();-->
-                                    <#--boolean hasPrevious();-->
-                                    <#--default Pageable getPageable() {-->
-                                    <#--return PageRequest.of(this.getNumber(), this.getSize(), this.getSort());-->
-                                    <#--}-->
-                                    <#--Pageable nextPageable();-->
-                                    <#--Pageable previousPageable();-->
-
                                     <#if userMessagePage??>
                                         <#list userMessagePage.content as userMessage>
 
                                             <tr>
                                             <td class="text-nowrap">${userMessage_index}</td>
-                                            <td class="text-nowrap">${userMessage.id}</td>
+                                            <td class="text-nowrap">${userMessage.createTime}</td>
                                             <td>${userMessage.title}</td>
+                                            <td>${userMessage.content}</td>
+
                                             <#if userMessage.state==1>
                                                 <th>
                                                     <button class="btn btn-rounded btn-info">未读</button>
@@ -91,12 +77,18 @@
                                                 </th>
                                             </#if>
 
-                                            <td>
-                                                <button type="button" class="btn btn-outline-primary">标记已读</button>
-                                                <button class="btn btn-outline-primary" data-toggle="modal" data-target="#modal-4">Primary</button>
-                                                <button type="button" class="btn btn-outline-danger">删除</button>
 
-                                            </td>
+                                            <#if userMessage.state==1>
+                                                <th>
+                                                    <a href="/userMessage/markRead?id=${userMessage.id}" class="btn btn-outline-primary">标记已读</a>
+                                                </th>
+
+                                            <#else >
+                                                <th>
+                                                    <a type="button" class="btn btn-outline-danger">删除</a>
+                                                </th>
+                                            </#if>
+
                                             </tr>
 
                                         </#list>
