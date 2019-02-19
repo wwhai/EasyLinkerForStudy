@@ -1,18 +1,18 @@
 package com.easyiot.easylinker.service;
 
-import com.easyiot.easylinker.dao.UserDAO;
-import com.easyiot.easylinker.model.User;
+import com.easyiot.easylinker.dao.MqttClientDAO;
+import com.easyiot.easylinker.model.MqttClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
-    private final UserDAO dao;
+public class MqttClientService {
+    private final MqttClientDAO dao;
 
     @Autowired
-    public UserService(UserDAO dao) {
+    public MqttClientService(MqttClientDAO dao) {
         this.dao = dao;
     }
 
@@ -24,7 +24,7 @@ public class UserService {
      * @return
      */
 
-    public User findOneById(long id) {
+    public MqttClient findOneById(long id) {
         return dao.findById(id).get();
 
     }
@@ -57,21 +57,21 @@ public class UserService {
     /**
      * 在数据库存储当前 Model
      *
-     * @param user
+     * @param MqttClient
      */
 
-    public void save(User user) {
-        dao.save(user);
+    public void save(MqttClient MqttClient) {
+        dao.save(MqttClient);
     }
 
     /**
      * 更新Model
      *
-     * @param user
+     * @param MqttClient
      */
 
-    public void update(User user) {
-        dao.save(user);
+    public void update(MqttClient MqttClient) {
+        dao.save(MqttClient);
     }
 
     /**
@@ -81,31 +81,7 @@ public class UserService {
      * @return
      */
 
-    public Page<User> list(Pageable pageable) {
+    public Page<MqttClient> list(Pageable pageable) {
         return dao.findAll(pageable);
     }
-
-    /**
-     * 根据用户名查找用户
-     *
-     * @param username
-     * @param password
-     * @return
-     */
-    public User getByUsernameAndPassword(String username, String password) {
-        return dao.findTopByUsernameAndPassword(username, password);
-    }
-
-    /**
-     * 根据邮箱查找
-     *
-     * @param email
-     * @param password
-     * @return
-     */
-    public User getTopByEmailAndPassword(String email, String password) {
-        return dao.findTopByEmailAndPassword(email, password);
-    }
-
-
 }

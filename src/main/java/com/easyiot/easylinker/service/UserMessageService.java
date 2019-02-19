@@ -1,18 +1,18 @@
 package com.easyiot.easylinker.service;
 
-import com.easyiot.easylinker.dao.UserDAO;
-import com.easyiot.easylinker.model.User;
+import com.easyiot.easylinker.dao.UserMessageDAO;
+import com.easyiot.easylinker.model.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
-    private final UserDAO dao;
+public class UserMessageService {
+    private final UserMessageDAO dao;
 
     @Autowired
-    public UserService(UserDAO dao) {
+    public UserMessageService(UserMessageDAO dao) {
         this.dao = dao;
     }
 
@@ -24,7 +24,7 @@ public class UserService {
      * @return
      */
 
-    public User findOneById(long id) {
+    public UserMessage findOneById(long id) {
         return dao.findById(id).get();
 
     }
@@ -57,21 +57,21 @@ public class UserService {
     /**
      * 在数据库存储当前 Model
      *
-     * @param user
+     * @param UserMessage
      */
 
-    public void save(User user) {
-        dao.save(user);
+    public void save(UserMessage UserMessage) {
+        dao.save(UserMessage);
     }
 
     /**
      * 更新Model
      *
-     * @param user
+     * @param UserMessage
      */
 
-    public void update(User user) {
-        dao.save(user);
+    public void update(UserMessage UserMessage) {
+        dao.save(UserMessage);
     }
 
     /**
@@ -81,31 +81,20 @@ public class UserService {
      * @return
      */
 
-    public Page<User> list(Pageable pageable) {
+    public Page<UserMessage> list(Pageable pageable) {
         return dao.findAll(pageable);
     }
 
     /**
-     * 根据用户名查找用户
+     * 查找用户的消息
      *
-     * @param username
-     * @param password
+     * @param userId
+     * @param state
+     * @param pageable
      * @return
      */
-    public User getByUsernameAndPassword(String username, String password) {
-        return dao.findTopByUsernameAndPassword(username, password);
+    public Page<UserMessage> list(Long userId, Integer state, Pageable pageable) {
+        return dao.findAllByUserIdAndState(userId, state, pageable);
+
     }
-
-    /**
-     * 根据邮箱查找
-     *
-     * @param email
-     * @param password
-     * @return
-     */
-    public User getTopByEmailAndPassword(String email, String password) {
-        return dao.findTopByEmailAndPassword(email, password);
-    }
-
-
 }
