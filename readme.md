@@ -30,3 +30,15 @@
 5. ESP8266网络基础
 6. 进阶:远程控制LED开关
 7. 项目实战:温湿度监控平台
+
+# 前期DEMO预览
+## 登录
+![picture](/screenshot/1.png)
+## 控制台
+![picture](/screenshot/2.png)
+## 系统消息
+![picture](/screenshot/3.png)
+## 设备列表
+![picture](/screenshot/4.png)
+## 数据展示
+![picture](/screenshot/5.png)
