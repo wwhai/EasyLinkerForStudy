@@ -25,7 +25,12 @@
                                     <input type="text" id="input-group-2" name="input1-group2" class="form-control"
                                            placeholder="关键字:ID/UUID/客户端ID">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary">
+                                        <i class="fa fa-search"></i> 搜索
+                                    </button>
+                                </div>
+                                <div class="col-md-2">
                                     <button type="button" class="btn btn-primary">
                                         <i class="fa fa-search"></i> 搜索
                                     </button>
