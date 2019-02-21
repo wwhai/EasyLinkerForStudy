@@ -33,12 +33,12 @@
 
 # 前期DEMO预览
 ## 登录
-![picture](/screenshot/1.png)
+![picture](./screenshot/1.png)
 ## 控制台
-![picture](/screenshot/2.png)
+![picture](./screenshot/2.png)
 ## 系统消息
-![picture](/screenshot/3.png)
+![picture](./screenshot/3.png)
 ## 设备列表
-![picture](/screenshot/4.png)
+![picture](./screenshot/4.png)
 ## 数据展示
-![picture](/screenshot/5.png)
+![picture](./screenshot/5.png)
