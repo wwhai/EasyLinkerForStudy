@@ -11,7 +11,7 @@
 
             <li class="nav-item nav-dropdown">
                 <a href="#" class="nav-link nav-dropdown-toggle">
-                    <i class="icon icon-target"></i> Mqtt客户端管理 <i class="fa fa-caret-left"></i>
+                    <i class="icon icon-target"></i> 客户端管理 <i class="fa fa-caret-left"></i>
                 </a>
 
                 <ul class="nav-dropdown-items">
