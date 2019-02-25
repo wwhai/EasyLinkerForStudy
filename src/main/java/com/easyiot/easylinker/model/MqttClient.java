@@ -50,9 +50,9 @@ public class MqttClient {
      */
     private Integer access = 1;
     /**
-     * topic= /mqtt/client/userId/groupId/clientId
+     * topic= /mqtt/client/clientId
      */
-    private String topic = "/mqtt/client/userId/";
+    private String topic = "/mqtt/client/"+getClientId();
 
     /**
      *
