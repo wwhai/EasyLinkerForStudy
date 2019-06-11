@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -61,4 +62,49 @@ public class MqttClientController {
         return modelAndView;
 
     }
+
+    /**
+     * 转向视图
+     *
+     * @param modelAndView
+     * @return
+     */
+    @RequestMapping(value = "/toAdd")
+    public ModelAndView toAdd(ModelAndView modelAndView) {
+
+        modelAndView.setViewName("mqtt/add");
+        return modelAndView;
+
+    }
+
+    /**
+     * 添加设备
+     *
+     * @param modelAndView
+     * @param httpServletRequest
+     * @return
+     */
+
+    @RequestMapping(value = "/add")
+    public ModelAndView add(ModelAndView modelAndView, HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes) {
+
+        String deviceDescribe = httpServletRequest.getParameter("deviceDescribe");
+        String name = httpServletRequest.getParameter("name");
+
+        if (name == null || deviceDescribe == null) {
+            redirectAttributes.addFlashAttribute("tip_message", "请输入关键信息!");
+            modelAndView.setViewName("redirect:/mqttClient/toAdd");
+            return modelAndView;
+        }
+        MqttClient mqttClient = new MqttClient();
+        mqttClient.setName(name);
+        mqttClient.setDeviceDescribe(deviceDescribe);
+        mqttClientService.save(mqttClient);
+        redirectAttributes.addFlashAttribute("tip_message", "添加成功!");
+        modelAndView.setViewName("redirect:/mqttClient/toAdd");
+        return modelAndView;
+
+    }
+
+
 }

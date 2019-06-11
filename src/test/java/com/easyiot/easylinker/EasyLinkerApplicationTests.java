@@ -1,9 +1,11 @@
 package com.easyiot.easylinker;
 
 import com.easyiot.easylinker.model.MqttClient;
+import com.easyiot.easylinker.model.User;
 import com.easyiot.easylinker.model.UserMessage;
 import com.easyiot.easylinker.service.MqttClientService;
 import com.easyiot.easylinker.service.UserMessageService;
+import com.easyiot.easylinker.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +20,19 @@ public class EasyLinkerApplicationTests {
     @Autowired
     UserMessageService userMessageService;
 
+    @Autowired
+    UserService userService;
+
     @Test
     public void contextLoads() {
+        User user = new User();
+        user.setNickname("大牛牛");
+        user.setPassword("123456");
+        user.setEmail("123@qq.com");
+        user.setRoles("ADMIN");
+        user.setUsername("admin");
+        user.setToken("token");
+        userService.save(user);
         for (int i = 0; i < 25; i++) {
             MqttClient mqttClient = new MqttClient();
             mqttClientService.save(mqttClient);

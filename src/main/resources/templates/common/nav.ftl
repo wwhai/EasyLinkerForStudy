@@ -5,7 +5,7 @@
 
     <a class="navbar-brand" href="#">
         <#--<img src="../../imgs/logo.png" alt="logo">-->
-        <h3>温湿度监控平台</h3>
+        <h3>家庭数据监控系统</h3>
     </a>
 
     <a href="#" class="btn btn-link sidebar-toggle d-md-down-none">

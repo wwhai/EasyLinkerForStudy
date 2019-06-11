@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-primary">
-                                        <i class="fa fa-search"></i> 搜索
+                                        <i class="fa fa-search"></i> <a href="/mqttClient/toAdd">添加设备</a>
                                     </button>
                                 </div>
                             </div>
@@ -85,13 +85,20 @@
                                         <#list mqttClientPage.content as mqttClient>
 
                                             <tr>
-                                            <td class="text-nowrap">${mqttClient_index}</td>
-                                            <td class="text-nowrap">${mqttClient.clientId}</td>
-                                            <td>${mqttClient.username}</td>
-                                            <td>${mqttClient.deviceDescribe}</td>
-                                            <td>[${mqttClient.latitude},${mqttClient.longitude}]</td>
-                                            <td>
-                                        <a href="/mqttClient/detail?clientId=${mqttClient.id}" class="btn-outline-primary">详情</a></td>
+                                                <td class="text-nowrap">${mqttClient_index}</td>
+                                                <td class="text-nowrap">${mqttClient.clientId}</td>
+                                                <#if mqttClient.name??>
+                                                    <td>${mqttClient.name}</td>
+                                                <#else>
+                                                    <td>暂无名称</td>
+                                                </#if>
+
+
+                                                <td>${mqttClient.deviceDescribe}</td>
+                                                <td>[${mqttClient.latitude},${mqttClient.longitude}]</td>
+                                                <td>
+                                                    <a href="/mqttClient/detail?clientId=${mqttClient.id}"
+                                                       class="btn-outline-primary">详情</a></td>
 
                                             </tr>
                                         </#list>
@@ -107,11 +114,13 @@
                                     </li>
                                     <#if mqttClientPage.isFirst() && !mqttClientPage.isLast() &&(mqttClientPage.number-1>0)>
                                         <li>
-                                        <a class="btn-outline-primary" href="/mqttClient/list?page=${mqttClientPage.number-1}&size=20">[上一页]</a>
+                                            <a class="btn-outline-primary"
+                                               href="/mqttClient/list?page=${mqttClientPage.number-1}&size=20">[上一页]</a>
                                         </li>
 
                                         <li>
-                                        <a class="btn-outline-primary" href="/mqttClient/list?page=${mqttClientPage.number+1}&size=20">[下一页]</a>
+                                            <a class="btn-outline-primary"
+                                               href="/mqttClient/list?page=${mqttClientPage.number+1}&size=20">[下一页]</a>
                                         </li>
                                     </#if>
 
@@ -126,13 +135,15 @@
 
                                     <#if !mqttClientPage.isFirst() && mqttClientPage.isLast()>
                                         <li>
-                                        <a class="btn-outline-primary" href="/mqttClient/list?page=${mqttClientPage.number-1}&size=20">[上一页]</a>
+                                            <a class="btn-outline-primary"
+                                               href="/mqttClient/list?page=${mqttClientPage.number-1}&size=20">[上一页]</a>
                                         </li>
                                     </#if>
 
                                     <#if mqttClientPage.isFirst() && !mqttClientPage.isLast()>
                                         <li>
-                                        <a class="btn-outline-primary" href="/mqttClient/list?page=${mqttClientPage.number+1}&size=20">[下一页]</a>
+                                            <a class="btn-outline-primary"
+                                               href="/mqttClient/list?page=${mqttClientPage.number+1}&size=20">[下一页]</a>
                                         </li>
                                     </#if>
 

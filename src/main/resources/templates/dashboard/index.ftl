@@ -13,13 +13,13 @@
         <div class="content">
 
             <div class="jumbotron alert-dismissable">
-                <h1>欢迎进入终端管理系统!</h1>
+                <h1>欢迎进入智能家庭数据监控系统!</h1>
             </div>
 
 
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title">客户端数据总览</h3>
+                    <h3 class="panel-title">设备数据总览</h3>
                 </div>
                 <div class="panel-body">
                     <div class="container-fluid">
@@ -28,7 +28,7 @@
                                 <div class="card p-4">
                                     <div class="card-body d-flex justify-content-between align-items-center">
                                         <div>
-                                            <span class="h4 d-block font-weight-normal mb-2">54</span>
+                                            <span class="h4 d-block font-weight-normal mb-2">0</span>
                                             <span class="font-weight-light">设备总数</span>
                                         </div>
 
@@ -43,7 +43,7 @@
                                 <div class="card p-4">
                                     <div class="card-body d-flex justify-content-between align-items-center">
                                         <div>
-                                            <span class="h4 d-block font-weight-normal mb-2">3200</span>
+                                            <span class="h4 d-block font-weight-normal mb-2">0</span>
                                             <span class="font-weight-light">在线设备</span>
                                         </div>
 
@@ -58,7 +58,7 @@
                                 <div class="card p-4">
                                     <div class="card-body d-flex justify-content-between align-items-center">
                                         <div>
-                                            <span class="h4 d-block font-weight-normal mb-2">900</span>
+                                            <span class="h4 d-block font-weight-normal mb-2">0</span>
                                             <span class="font-weight-light">离线设备</span>
                                         </div>
 
@@ -73,7 +73,7 @@
                                 <div class="card p-4">
                                     <div class="card-body d-flex justify-content-between align-items-center">
                                         <div>
-                                            <span class="h4 d-block font-weight-normal mb-2">32</span>
+                                            <span class="h4 d-block font-weight-normal mb-2">0</span>
                                             <span class="font-weight-light">活跃设备</span>
                                         </div>
 
