@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="card-body">
-                            <canvas id="line-chart" width="100%" height="50"></canvas>
+                            <div id="line-chart" style="width: 100%; height: 300px;"></div>
                         </div>
                     </div>
                 </div>
@@ -42,5 +42,7 @@
     </div>
 </div>
 <#include "../common/html_common_footer.ftl">
+
+<script src="/js/line-chart.js"></script>
 </body>
 </html>
