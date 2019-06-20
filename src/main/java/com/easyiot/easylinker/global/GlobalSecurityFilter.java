@@ -23,6 +23,8 @@ public class GlobalSecurityFilter implements Filter {
     public GlobalSecurityFilter() {
         allowList.add("/");
         allowList.add("/login");
+        allowList.add("/data/api");
+
 
     }
 
@@ -32,21 +34,26 @@ public class GlobalSecurityFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponseWrapper wrapper = new HttpServletResponseWrapper((HttpServletResponse) servletResponse);
         User user = (User) httpServletRequest.getSession().getAttribute("user");
-        if (allowList.contains(httpServletRequest.getRequestURI()) ||
-                httpServletRequest.getRequestURI().endsWith(".js") ||
-                httpServletRequest.getRequestURI().endsWith(".css")) {
-            filterChain.doFilter(servletRequest, servletResponse);
-        } else {
-            if (user != null) {
-                //System.out.println(user.getNickname() + " 已登录!");
+        for (String s : allowList) {
+            if (httpServletRequest.getRequestURI().startsWith(s) ||
+                    httpServletRequest.getRequestURI().endsWith(".js") ||
+                    httpServletRequest.getRequestURI().endsWith(".css")) {
+
                 filterChain.doFilter(servletRequest, servletResponse);
             } else {
-                //System.out.println("未登录" + "URL " + httpServletRequest.getRequestURI());
+                if (user != null) {
+                    //System.out.println(user.getNickname() + " 已登录!");
+                    filterChain.doFilter(servletRequest, servletResponse);
+                } else {
+                    //System.out.println("未登录" + "URL " + httpServletRequest.getRequestURI());
 
-                wrapper.sendRedirect("/");
+                    if (!httpServletRequest.getRequestURI().startsWith("/data/api")) {
+                        wrapper.sendRedirect("/");
+                    }
 
+
+                }
             }
         }
-
     }
 }

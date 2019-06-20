@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <button type="button" class="btn btn-primary">
-                                        <i class="fa fa-search"></i> 搜索
+                                        <i class="fa fa-search"></i> <a href="/simpleHttpClient/toAdd">添加设备</a>
                                     </button>
                                 </div>
                             </div>
@@ -84,12 +84,13 @@
                                         <#list clientPage.content as client>
 
                                             <tr>
-                                            <td class="text-nowrap">${client_index}</td>
-                                            <td class="text-nowrap">${client.clientId}</td>
-                                            <td>${client.deviceDescribe}</td>
-                                            <td>[${client.latitude},${client.longitude}]</td>
-                                            <td>
-                                        <a href="/simpleHttpClient/detail?clientId=${client.id}" class="btn-outline-primary">详情</a></td>
+                                                <td class="text-nowrap">${client_index}</td>
+                                                <td class="text-nowrap">${client.clientId}</td>
+                                                <td>${client.deviceDescribe}</td>
+                                                <td>[${client.latitude},${client.longitude}]</td>
+                                                <td>
+                                                    <a href="/simpleHttpClient/detail?clientId=${client.id}"
+                                                       class="btn-outline-primary">详情</a></td>
 
                                             </tr>
                                         </#list>
@@ -105,11 +106,13 @@
                                     </li>
                                     <#if clientPage.isFirst() && !clientPage.isLast() &&(clientPage.number-1>0)>
                                         <li>
-                                        <a class="btn-outline-primary" href="/client/list?page=${clientPage.number-1}&size=20">[上一页]</a>
+                                            <a class="btn-outline-primary"
+                                               href="/client/list?page=${clientPage.number-1}&size=20">[上一页]</a>
                                         </li>
 
                                         <li>
-                                        <a class="btn-outline-primary" href="/client/list?page=${clientPage.number+1}&size=20">[下一页]</a>
+                                            <a class="btn-outline-primary"
+                                               href="/client/list?page=${clientPage.number+1}&size=20">[下一页]</a>
                                         </li>
                                     </#if>
 
@@ -124,13 +127,15 @@
 
                                     <#if !clientPage.isFirst() && clientPage.isLast()>
                                         <li>
-                                        <a class="btn-outline-primary" href="/client/list?page=${clientPage.number-1}&size=20">[上一页]</a>
+                                            <a class="btn-outline-primary"
+                                               href="/simpleHttpClient/list?page=${clientPage.number-1}&size=20">[上一页]</a>
                                         </li>
                                     </#if>
 
                                     <#if clientPage.isFirst() && !clientPage.isLast()>
                                         <li>
-                                        <a class="btn-outline-primary" href="/client/list?page=${clientPage.number+1}&size=20">[下一页]</a>
+                                            <a class="btn-outline-primary"
+                                               href="/simpleHttpClient/list?page=${clientPage.number+1}&size=20">[下一页]</a>
                                         </li>
                                     </#if>
 

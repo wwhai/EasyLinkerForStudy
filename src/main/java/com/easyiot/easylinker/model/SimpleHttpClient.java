@@ -22,7 +22,7 @@ public class SimpleHttpClient {
      *
      */
 
-    private String deviceDescribe = "Mqtt Client";
+    private String deviceDescribe = "Http Client";
 
     /**
      *

@@ -4,13 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.easyiot.easylinker.model.ClientData;
 import com.easyiot.easylinker.service.ClientDataService;
-import com.easyiot.easylinker.service.MqttClientService;
+import com.easyiot.easylinker.service.SimpleHttpClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 数据上传控制器
@@ -21,7 +21,8 @@ public class DataController {
     @Autowired
     ClientDataService clientDataService;
     @Autowired
-    MqttClientService mqttClientService;
+    SimpleHttpClientService simpleHttpClientService;
+
 
     /**
      * 数据从外部进来
@@ -39,7 +40,7 @@ public class DataController {
         try {
             JSONObject data = JSON.parseObject(body);
             if (StringUtils.hasText(data.getString("value")) && data.getLong("clientId") != null) {
-                if (mqttClientService.findOneById(data.getLong("clientId")) == null) {
+                if (simpleHttpClientService.findOneById(data.getLong("clientId")) == null) {
                     JSONObject error = new JSONObject();
                     error.put("state", 4);
                     error.put("message", "此客户端不存在!");
@@ -69,6 +70,23 @@ public class DataController {
             return error;
         }
 
+
+    }
+
+    /**
+     * 获取数据
+     *
+     * @param clientId
+     * @param page
+     * @param size
+     * @return
+     */
+
+    @GetMapping("/dataList/{clientId}/{page}/{size}")
+    @Transactional
+    public Object getData(@PathVariable String clientId, @PathVariable int page, @PathVariable int size) {
+
+        return clientDataService.list(clientId, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id")));
 
     }
 

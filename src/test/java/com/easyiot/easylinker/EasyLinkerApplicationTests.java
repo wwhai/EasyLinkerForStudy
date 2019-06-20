@@ -1,13 +1,7 @@
 package com.easyiot.easylinker;
 
-import com.easyiot.easylinker.model.ClientData;
-import com.easyiot.easylinker.model.MqttClient;
-import com.easyiot.easylinker.model.User;
-import com.easyiot.easylinker.model.UserMessage;
-import com.easyiot.easylinker.service.ClientDataService;
-import com.easyiot.easylinker.service.MqttClientService;
-import com.easyiot.easylinker.service.UserMessageService;
-import com.easyiot.easylinker.service.UserService;
+import com.easyiot.easylinker.model.*;
+import com.easyiot.easylinker.service.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +21,8 @@ public class EasyLinkerApplicationTests {
 
     @Autowired
     ClientDataService clientDataService;
+    @Autowired
+    SimpleHttpClientService simpleHttpClientService;
 
     @Test
     public void contextLoads() {
@@ -38,9 +34,33 @@ public class EasyLinkerApplicationTests {
         user.setUsername("admin");
         user.setToken("token");
         userService.save(user);
+        /**
+         * 添加测试 MQTT客户端数据
+         */
         for (int i = 0; i < 25; i++) {
             MqttClient mqttClient = new MqttClient();
             mqttClientService.save(mqttClient);
+            for (int j = 0; j < 23; j++) {
+                ClientData clientData = new ClientData();
+                clientData.setClientId(mqttClient.getId());
+                clientData.setValue("{\"h\":55,\"c\":27,\"f\":80.5999984741211,\"cc\":21.985000610351562,\"ff\":81.923568725585938}\n");
+                clientDataService.save(clientData);
+            }
+
+        }
+
+        /**
+         * 添加测试 HTTP 客户端数据
+         */
+        for (int i = 0; i < 25; i++) {
+            SimpleHttpClient simpleHttpClient = new SimpleHttpClient();
+            simpleHttpClientService.save(simpleHttpClient);
+            for (int j = 0; j < 23; j++) {
+                ClientData clientData = new ClientData();
+                clientData.setClientId(simpleHttpClient.getId());
+                clientData.setValue("{\"h\":55,\"c\":27,\"f\":80.5999984741211,\"cc\":21.985000610351562,\"ff\":81.923568725585938}\n");
+                clientDataService.save(clientData);
+            }
 
         }
 
@@ -59,16 +79,7 @@ public class EasyLinkerApplicationTests {
     /**
      * {"h":55,"c":27,"f":80.5999984741211,"cc":21.985000610351562,"ff":81.923568725585938}
      */
-    @Test
-    public void addData() {
-        for (int i = 0; i < 55; i++) {
-            ClientData clientData = new ClientData();
-            clientData.setClientId(1l);
-            clientData.setValue("{\"h\":55,\"c\":27,\"f\":80.5999984741211,\"cc\":21.985000610351562,\"ff\":81.923568725585938}\n");
-            clientDataService.save(clientData);
-        }
 
-    }
 
 }
 

@@ -5,6 +5,7 @@ import com.easyiot.easylinker.service.MqttClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,10 +33,10 @@ public class MqttClientController {
             int size = Integer.parseInt(httpServletRequest.getParameter("size"));
             if (page <= 0) page = 0;
             if (size <= 0) size = 20;
-            Page<MqttClient> mqttClientPage = mqttClientService.list(PageRequest.of(page, size));
+            Page<MqttClient> mqttClientPage = mqttClientService.list(PageRequest.of(page, size,Sort.by(Sort.Direction.DESC, "id")));
             modelAndView.addObject("mqttClientPage", mqttClientPage);
         } else {
-            Page<MqttClient> mqttClientPage = mqttClientService.list(PageRequest.of(0, 20));
+            Page<MqttClient> mqttClientPage = mqttClientService.list(PageRequest.of(0, 20, Sort.by(Sort.Direction.DESC, "id")));
             modelAndView.addObject("mqttClientPage", mqttClientPage);
         }
         modelAndView.setViewName("mqtt/list");

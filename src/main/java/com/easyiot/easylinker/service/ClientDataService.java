@@ -84,4 +84,11 @@ public class ClientDataService {
     public Page<ClientData> list(Pageable pageable) {
         return dao.findAll(pageable);
     }
+
+
+    public Page<ClientData> list(String clientId, Pageable pageable) {
+        return dao.findAll(pageable);
+    }
+
+
 }

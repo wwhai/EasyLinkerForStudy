@@ -1,22 +1,21 @@
 package com.easyiot.easylinker.global;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 全局异常处理
  */
 @ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(NullPointerException.class)
+    @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ModelAndView handleIOException(Exception e, ModelAndView modelAndView) {
-        modelAndView.setViewName("500");
-        return modelAndView;
+    public JSONObject handleIOException(Exception e) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("error", e.getMessage());
+        return jsonObject;
     }
 }
