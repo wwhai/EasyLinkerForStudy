@@ -84,9 +84,11 @@ public class DataController {
 
     @GetMapping("/dataList/{clientId}/{page}/{size}")
     @Transactional
-    public Object getData(@PathVariable String clientId, @PathVariable int page, @PathVariable int size) {
+    public JSONObject getData(@PathVariable String clientId, @PathVariable int page, @PathVariable int size) {
+        JSONObject result=new JSONObject();
+        result.put("data",clientDataService.list(clientId, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"))));
 
-        return clientDataService.list(clientId, PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id")));
+        return result;
 
     }
 

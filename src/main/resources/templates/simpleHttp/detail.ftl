@@ -17,10 +17,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header bg-light">
-                            图形数据
-                        </div>
-
                         <div class="card-body">
                             <div id="main" style="width: 100%;height:400px;"></div>
                         </div>
@@ -107,29 +103,66 @@
     </div>
 </div>
 <script type="text/javascript" src="/vendor/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="/vendor/jquery/jquery.js"></script>
 
 <script>
     // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
+    let myChart = echarts.init(document.getElementById('main'));
+
+    $.get("/data/api/dataList/1/0/10", function (data) {
+        console.log("Data: " + JSON.parse(JSON.stringify(data.data)));
+    });
 
     // 指定图表的配置项和数据
-    var option = {
+    let option = {
+        color: ['#c23531', '#2f4554', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3'],
+        title: {
+            text: '温湿度变化曲线'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['温度', '湿度', '温度指数', '湿度指数']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
         xAxis: {
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         },
         yAxis: {
             type: 'value'
         },
-        series: [{
-            name: '温度',
-            data: [25, 52, 35, 38, 40, 44, 47],
-            type: 'line'
-        },
+        series: [
+            {
+                name: '温度',
+                data: [25, 52, 33, 38, 21, 44, 1],
+                type: 'line'
+            },
             {
                 name: '湿度',
                 type: 'line',
                 data: [10, 12, 13, 14, 12, 11, 9]
+            },
+            {
+                name: '湿度指数',
+                type: 'line',
+                data: [11, 12, 16, 1, 2, 3, 9]
+            },
+            {
+                name: '湿度指数',
+                type: 'line',
+                data: [4, 6, 13, 1, 25, 17, 9]
             }]
     };
 
