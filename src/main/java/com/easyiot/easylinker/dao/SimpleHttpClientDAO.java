@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SimpleHttpClientDAO extends JpaRepository<SimpleHttpClient, Long> {
 
+    SimpleHttpClient findTopByClientId(String clientID);
 }

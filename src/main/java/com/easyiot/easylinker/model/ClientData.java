@@ -17,7 +17,7 @@ public class ClientData {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long clientId;
+    private String clientId;
     private String value;
     private Date createTime = new Date();
 

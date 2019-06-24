@@ -84,4 +84,8 @@ public class SimpleHttpClientService {
     public Page<SimpleHttpClient> list(Pageable pageable) {
         return dao.findAll(pageable);
     }
+
+    public SimpleHttpClient findOneByClientId(String clientId) {
+        return dao.findTopByClientId(clientId);
+    }
 }

@@ -42,7 +42,7 @@ public class EasyLinkerApplicationTests {
             mqttClientService.save(mqttClient);
             for (int j = 0; j < 23; j++) {
                 ClientData clientData = new ClientData();
-                clientData.setClientId(mqttClient.getId());
+                clientData.setClientId(mqttClient.getClientId());
                 clientData.setValue("{\"h\":55,\"c\":27,\"f\":80.5999984741211,\"cc\":21.985000610351562,\"ff\":81.923568725585938}\n");
                 clientDataService.save(clientData);
             }
@@ -57,7 +57,7 @@ public class EasyLinkerApplicationTests {
             simpleHttpClientService.save(simpleHttpClient);
             for (int j = 0; j < 23; j++) {
                 ClientData clientData = new ClientData();
-                clientData.setClientId(simpleHttpClient.getId());
+                clientData.setClientId(simpleHttpClient.getClientId());
                 clientData.setValue("{\"h\":55,\"c\":27,\"f\":80.5999984741211,\"cc\":21.985000610351562,\"ff\":81.923568725585938}\n");
                 clientDataService.save(clientData);
             }
