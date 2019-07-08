@@ -16,7 +16,7 @@ public class SimpleHttpClient {
     /**
      *
      */
-    private Long id;
+    private String id;
 
     /**
      *

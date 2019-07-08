@@ -80,6 +80,5 @@ public class EasyLinkerApplicationTests {
      * {"h":55,"c":27,"f":80.5999984741211,"cc":21.985000610351562,"ff":81.923568725585938}
      */
 
-
 }
 

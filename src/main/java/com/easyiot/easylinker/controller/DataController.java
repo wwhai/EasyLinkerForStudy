@@ -2,6 +2,7 @@ package com.easyiot.easylinker.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.easyiot.easylinker.model.ClientData;
+import com.easyiot.easylinker.amq.impl.AmqServiceImpl;
 import com.easyiot.easylinker.service.ClientDataService;
 import com.easyiot.easylinker.service.SimpleHttpClientService;
 import lombok.Data;
@@ -24,7 +25,8 @@ public class DataController {
     ClientDataService clientDataService;
     @Autowired
     SimpleHttpClientService simpleHttpClientService;
-
+    @Autowired
+    AmqServiceImpl amqService;
 
     /**
      * 数据从外部进来
@@ -32,7 +34,8 @@ public class DataController {
      * @return
      */
     @PostMapping("/in")
-    public JSONObject in(@RequestBody @Valid DataParam dataParam) {
+    public JSONObject in(@RequestBody   @Valid DataParam dataParam) {
+        System.out.println("#"+dataParam);
         if (dataParam.value.length() > 1024) {
             JSONObject error = new JSONObject();
             error.put("state", 0);
@@ -76,6 +79,10 @@ public class DataController {
 
         return result;
 
+    }
+    @GetMapping("/amqtest")
+    public void amqTest(){
+        amqService.sendMessage("this a test!");
     }
 
     @Data

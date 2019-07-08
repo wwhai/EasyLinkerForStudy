@@ -55,9 +55,9 @@ public class SimpleHttpClientController {
     @RequestMapping(value = "/detail")
     public ModelAndView detail(ModelAndView modelAndView, HttpServletRequest httpServletRequest) {
         //clientId
-        long clientId = Long.parseLong(httpServletRequest.getParameter("clientId"));
-        if (clientId != 0) {
-            modelAndView.addObject("client", simpleHttpClientService.findOneById(clientId));
+        String clientId = httpServletRequest.getParameter("clientId").toString();
+        if (clientId != null) {
+            modelAndView.addObject("client", simpleHttpClientService.findOneByClientId(clientId));
         }
         modelAndView.setViewName("simpleHttp/detail");
         return modelAndView;
