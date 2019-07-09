@@ -1,8 +1,10 @@
 package com.easyiot.easylinker.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.easyiot.easylinker.config.MqttConfig;
 import com.easyiot.easylinker.model.ClientData;
 import com.easyiot.easylinker.amq.impl.AmqServiceImpl;
+import com.easyiot.easylinker.mqttServer.MqttServer;
 import com.easyiot.easylinker.service.ClientDataService;
 import com.easyiot.easylinker.service.SimpleHttpClientService;
 import lombok.Data;
@@ -27,7 +29,8 @@ public class DataController {
     SimpleHttpClientService simpleHttpClientService;
     @Autowired
     AmqServiceImpl amqService;
-
+    @Autowired
+    MqttServer.MqttGateway mqttGateway;
     /**
      * 数据从外部进来
      *
@@ -80,9 +83,14 @@ public class DataController {
         return result;
 
     }
+
     @GetMapping("/amqtest")
     public void amqTest(){
         amqService.sendMessage("this a test!");
+    }
+    @GetMapping("/send2mqtt")
+    public void MqttSendTest(){
+        mqttGateway.sendMessage("this a mqtt's sending message test");
     }
 
     @Data
