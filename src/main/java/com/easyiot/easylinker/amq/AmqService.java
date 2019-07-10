@@ -1,8 +1,10 @@
 package com.easyiot.easylinker.amq;
 
 
-import javax.jms.Destination;
+import org.springframework.stereotype.Service;
 
+import javax.jms.Destination;
+@Service
 public interface AmqService {
     /**
      * 消息发送接口

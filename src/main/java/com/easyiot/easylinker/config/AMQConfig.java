@@ -9,9 +9,13 @@ import javax.jms.Queue;
 
 @Configuration
 @EnableJms
-public class AMQconfig {
-    @Bean
+public class AMQConfig {
+    @Bean()
     public Queue queue(){
         return new ActiveMQQueue("test");
+    }
+    @Bean("queue2")
+    public Queue queue2(){
+        return new ActiveMQQueue("test23");
     }
 }

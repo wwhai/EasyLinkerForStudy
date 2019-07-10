@@ -1,19 +1,21 @@
 package com.easyiot.easylinker.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.easyiot.easylinker.config.MqttConfig;
+import com.easyiot.easylinker.amq.AmqService;
 import com.easyiot.easylinker.model.ClientData;
-import com.easyiot.easylinker.amq.impl.AmqServiceImpl;
 import com.easyiot.easylinker.mqttServer.MqttServer;
 import com.easyiot.easylinker.service.ClientDataService;
 import com.easyiot.easylinker.service.SimpleHttpClientService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.messaging.MessageHandler;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jms.Queue;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -28,7 +30,12 @@ public class DataController {
     @Autowired
     SimpleHttpClientService simpleHttpClientService;
     @Autowired
-    AmqServiceImpl amqService;
+    AmqService amqService;
+    @Autowired
+    Queue queue;
+    @Autowired
+    @Qualifier("queue2")
+    Queue queue2;
     @Autowired
     MqttServer.MqttGateway mqttGateway;
     /**
@@ -83,10 +90,13 @@ public class DataController {
         return result;
 
     }
-
     @GetMapping("/amqtest")
     public void amqTest(){
         amqService.sendMessage("this a test!");
+    }
+    @GetMapping("/amqtest2")
+    public void amqTest2(){
+        amqService.sendMessage(this.queue2,"this a test send to queue!");
     }
     @GetMapping("/send2mqtt")
     public void MqttSendTest(){

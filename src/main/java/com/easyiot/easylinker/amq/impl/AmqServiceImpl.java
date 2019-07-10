@@ -17,7 +17,7 @@ public class AmqServiceImpl implements AmqService {
     private JmsMessagingTemplate jmsMessagingTemplate;
     //发送消息到broker
 
-    @Override
+        @Override
     public void sendMessage(Destination destination, String message) {
         jmsMessagingTemplate.convertAndSend(destination,message);
     }

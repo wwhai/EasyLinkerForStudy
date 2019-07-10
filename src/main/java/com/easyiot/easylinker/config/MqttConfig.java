@@ -33,6 +33,7 @@ public class MqttConfig {
     @Value("${mqtt.topic}")
     private String topic;
     private String clientId="spring_MQTT_Client";
+    private String sendClientId="spring_MQTT_Send_Client";
 
     /**
      * 管理mqtt通道
@@ -51,7 +52,7 @@ public class MqttConfig {
     @Bean
     @ServiceActivator(inputChannel = "mqttOutputChanel")
     public MessageHandler outBound(){
-        MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(clientId,clientFactory());
+        MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(sendClientId,clientFactory());
         messageHandler.setAsync(true);
         messageHandler.setDefaultTopic(topic);
         return messageHandler;
