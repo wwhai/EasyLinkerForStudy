@@ -3,6 +3,7 @@ package com.easyiot.easylinker.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.easyiot.easylinker.amq.AmqService;
 import com.easyiot.easylinker.coap.CoapSender;
+import com.easyiot.easylinker.mail.SimpleMail;
 import com.easyiot.easylinker.model.ClientData;
 import com.easyiot.easylinker.mqttServer.MqttServer;
 import com.easyiot.easylinker.service.ClientDataService;
@@ -42,6 +43,8 @@ public class DataController {
     MqttServer.MqttGateway mqttGateway;
     @Autowired
     CoapSender coapSender;
+    @Autowired
+    SimpleMail simpleMail;
     /**
      * 数据从外部进来
      *
@@ -110,6 +113,10 @@ public class DataController {
     public void coapSendTest(@RequestParam(name = "payload") String payload) throws URISyntaxException {
         coapSender.coapMessageSender("testcoap",payload);
         // coapSender.coapMessageSender(); 测试方法
+    }
+    @GetMapping("/sendmail")
+    public void sendMail(){
+        simpleMail.sendSimpleMail();
     }
 
     @Data
