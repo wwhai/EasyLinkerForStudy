@@ -2,6 +2,7 @@ package com.easyiot.easylinker.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.easyiot.easylinker.amq.AmqService;
+import com.easyiot.easylinker.coap.CoapSender;
 import com.easyiot.easylinker.model.ClientData;
 import com.easyiot.easylinker.mqttServer.MqttServer;
 import com.easyiot.easylinker.service.ClientDataService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.jms.Queue;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.net.URISyntaxException;
 
 /**
  * 数据上传控制器
@@ -38,6 +40,8 @@ public class DataController {
     Queue queue2;
     @Autowired
     MqttServer.MqttGateway mqttGateway;
+    @Autowired
+    CoapSender coapSender;
     /**
      * 数据从外部进来
      *
@@ -99,8 +103,13 @@ public class DataController {
         amqService.sendMessage(this.queue2,"this a test send to queue!");
     }
     @GetMapping("/send2mqtt")
-    public void MqttSendTest(){
+    public void mqttSendTest(){
         mqttGateway.sendMessage("this a mqtt's sending message test");
+    }
+    @GetMapping("/send2coap")
+    public void coapSendTest(@RequestParam(name = "payload") String payload) throws URISyntaxException {
+        coapSender.coapMessageSender("testcoap",payload);
+        // coapSender.coapMessageSender(); 测试方法
     }
 
     @Data

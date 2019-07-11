@@ -16,6 +16,7 @@ public class MyCoapHandler extends CoapResource {
 
     @Override
     public void handlePOST(CoapExchange exchange) {
+        exchange.respond("OK!"+exchange.getRequestText());
         System.out.println("#coap_method:"+exchange.getRequestCode());
         System.out.println(" coap_text:"+exchange.getRequestText());
     }
