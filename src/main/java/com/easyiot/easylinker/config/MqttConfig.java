@@ -1,7 +1,6 @@
 package com.easyiot.easylinker.config;
 
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +20,7 @@ import org.springframework.stereotype.Service;
 @EnableConfigurationProperties
 public class MqttConfig {
 
+    public MqttPahoMessageDrivenChannelAdapter adapter;
     /**
      * 从配置文件中获取相关属性
      */
@@ -64,7 +64,7 @@ public class MqttConfig {
      */
     @Bean
     public MessageProducer inBound() {
-        MqttPahoMessageDrivenChannelAdapter adapter =
+         adapter =
                 new MqttPahoMessageDrivenChannelAdapter(server, clientId,
                         topic);
         adapter.setCompletionTimeout(5000);

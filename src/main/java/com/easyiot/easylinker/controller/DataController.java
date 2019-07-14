@@ -3,6 +3,7 @@ package com.easyiot.easylinker.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.easyiot.easylinker.amq.AmqService;
 import com.easyiot.easylinker.coap.CoapSender;
+import com.easyiot.easylinker.config.MqttConfig;
 import com.easyiot.easylinker.mail.SimpleMail;
 import com.easyiot.easylinker.model.ClientData;
 import com.easyiot.easylinker.mqttServer.MqttServer;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.messaging.MessageHandler;
+import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,6 +46,8 @@ public class DataController {
     CoapSender coapSender;
     @Autowired
     SimpleMail simpleMail;
+    @Autowired
+    MqttConfig mqttConfig;
     /**
      * 数据从外部进来
      *
@@ -117,6 +120,11 @@ public class DataController {
     @GetMapping("/sendmail")
     public void sendMail(){
         simpleMail.sendSimpleMail();
+    }
+
+    @GetMapping("/addtopic")
+    public void addTopic(@Param("topic") String topic){
+        mqttConfig.adapter.addTopic(topic,2);
     }
 
     @Data

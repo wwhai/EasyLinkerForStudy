@@ -1,5 +1,12 @@
 package com.easyiot.easylinker.mqttServer;
 
+
+import com.alibaba.fastjson.JSONObject;
+import com.easyiot.easylinker.model.ClientData;
+import com.easyiot.easylinker.model.MqttClient;
+import com.easyiot.easylinker.service.ClientDataService;
+import com.easyiot.easylinker.service.MqttClientService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.MessagingGateway;
@@ -11,6 +18,10 @@ import org.springframework.stereotype.Service;
 
 @Configuration
 public class MqttServer {
+    @Autowired
+    MqttClientService mqttClientService;
+    @Autowired
+    ClientDataService clientDataService;
     /**
      * 消息接收函数，处理接收到的消息
      * @return
@@ -18,8 +29,22 @@ public class MqttServer {
     @Bean()
     @ServiceActivator(inputChannel = "mqttInputChannel")
     public MessageHandler handler() {
-        return message -> System.out.println("###"+message.getPayload()
+        //init
+        return message ->{ System.out.println("###"+message.getPayload()
                 +"from: "+message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC));
+            MqttClient mqttClient = new MqttClient();
+            ClientData clientData = new ClientData();
+            JSONObject jsonObject = JSONObject.parseObject(
+                    message.getPayload().toString());
+            clientData.setClientId(jsonObject.getString("clientId"));
+            clientData.setValue(jsonObject.getString("value"));
+            mqttClient.setClientId(jsonObject.getString("clientId"));
+            mqttClient.setTopic(message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC).toString());
+            clientDataService.save(clientData);
+            mqttClientService.update(mqttClient);
+
+
+        };
     }
 
 

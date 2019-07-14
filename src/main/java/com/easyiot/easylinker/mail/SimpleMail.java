@@ -11,7 +11,6 @@ public class SimpleMail {
     JavaMailSender javaMailSender;
 
     public void sendSimpleMail() {
-        int i=10;
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         //发件人邮箱
         mailMessage.setFrom("");
@@ -22,6 +21,7 @@ public class SimpleMail {
         //内容
         mailMessage.setText("HELLO THANK U! ARE YOU OK?");
         javaMailSender.send(mailMessage);
+        System.out.println("#邮件发送成功！");
 
     }
 }
